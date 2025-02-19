@@ -1,0 +1,10 @@
+databaseChangeLog:
+  -  changeSet:
+       id:  update-data-type
+       author:  Gunay Hashimova
+       changes:
+         -  modifyDataType:
+              columnName:  age
+              newDataType:  varchar(100)
+              schemaName:  foo_fighters
+              tableName:  humans
