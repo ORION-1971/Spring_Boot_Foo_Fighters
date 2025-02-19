@@ -23,9 +23,9 @@ public class HumanEntity {                             // HumanEntity завис
   private Integer age;
 
   @CreationTimestamp
-  private LocalDateTime createdAt;
+  private LocalDateTime createdDate;
 
   @UpdateTimestamp
-  private LocalDateTime updatedAt;
+  private LocalDateTime updatedDate;
 
 }

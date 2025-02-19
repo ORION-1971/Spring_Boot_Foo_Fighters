@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
       id: tbl.user.001
-      author: Gunay Hashimova
+      author: ORION
       createTable:
         schemaName: foo_fighters
-        tableName: humans
+        tableName: users
         columns:
           - column:
               name: id
@@ -19,8 +19,8 @@ databaseChangeLog:
               name: name
               type: varchar(100)
           - column:
-              name: created_at
+              name: created_date
               type: timestamp(6)
           - column:
-              name: updated_at
+              name: updated_date
               type: timestamp(6)

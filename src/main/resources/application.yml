@@ -2,13 +2,13 @@ spring:
   application:
     name: ms-human
   datasource:
-    url: jdbc:mysql://localhost:3307/foo_fighters
+    url: jdbc:mysql://localhost:3306/foo_fighters
     password: root
     username: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    hibernate:
-      ddl-auto: update
+#    hibernate:
+#      ddl-auto: update
     show-sql: true
   liquibase:
     change-log: classpath:/liquibase/changelog-master.yml

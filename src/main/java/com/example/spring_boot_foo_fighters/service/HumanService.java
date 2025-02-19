@@ -49,7 +49,7 @@ public class HumanService {
 
         humanEntity.setName(humanDto.getName());
         humanEntity.setAge(humanDto.getAge());
-        humanEntity.setCreatedAt(humanEntity.getCreatedAt());
+        humanEntity.setCreatedDate(humanEntity.getCreatedDate());
         humanRepository.save(humanEntity);
     }
 
