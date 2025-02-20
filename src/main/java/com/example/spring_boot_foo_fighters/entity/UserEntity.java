@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.type.YesNoConverter;
 
 import java.time.LocalDateTime;
 
@@ -22,6 +23,10 @@ public class UserEntity {
 
     private Integer age;
 
+    private String phoneNumber;
+
+    @Column
+    //@Convert(converter = YesNoConverter.class)         // конвертирует true в "Y" (исправить type в varchar(10)->liquibase
     private Boolean isVerified;
 
     @CreationTimestamp
