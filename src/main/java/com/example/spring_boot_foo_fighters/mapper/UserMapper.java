@@ -17,7 +17,7 @@ import java.util.List;
 public interface UserMapper {
 
 
-    @Mapping(target = "name", source = "firstName")
+    /*@Mapping(target = "name", source = "firstName")
     @Mapping(target = "phoneNumber", expression = "java(deletePlus(userDto.getPhoneNumber()))")
     UserEntity toUserEntity(UserDto userDto);
 
@@ -27,6 +27,19 @@ public interface UserMapper {
 
     default String deletePlus(String phoneNumber) {
         return phoneNumber.replace("+", "");
+    }*/
+
+    @Mapping(target = "name", source = "firstName")
+    @Mapping(target = "phoneNumber", expression = "java(deletePlus(userDto))")
+    UserEntity toUserEntity(UserDto userDto);
+
+    @Mapping(target = "firstName", source = "name")
+    UserDto toUserDto(UserEntity userEntity);
+
+    List<UserDto> toUserDto(List<UserEntity> userEntity);
+
+    default String deletePlus(UserDto userDto) {
+        return userDto.getPhoneNumber().replace("+", "");
     }
 
 }

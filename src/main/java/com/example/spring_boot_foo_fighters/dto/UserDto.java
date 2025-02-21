@@ -6,7 +6,10 @@ import lombok.Data;
 public class UserDto {
 
     private String firstName;
+
     private Integer age;
+
     private Boolean isVerified;
+
     private String phoneNumber;
 }
