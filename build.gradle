@@ -46,6 +46,7 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.27.3'
 }
 
 tasks.named('test') {

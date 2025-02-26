@@ -16,19 +16,6 @@ import java.util.List;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface UserMapper {
 
-
-    /*@Mapping(target = "name", source = "firstName")
-    @Mapping(target = "phoneNumber", expression = "java(deletePlus(userDto.getPhoneNumber()))")
-    UserEntity toUserEntity(UserDto userDto);
-
-    UserDto toUserDto(UserEntity userEntity);
-
-    List<UserDto> toUserDto(List<UserEntity> userEntity);
-
-    default String deletePlus(String phoneNumber) {
-        return phoneNumber.replace("+", "");
-    }*/
-
     @Mapping(target = "name", source = "firstName")
     @Mapping(target = "phoneNumber", expression = "java(deletePlus(userDto))")
     UserEntity toUserEntity(UserDto userDto);

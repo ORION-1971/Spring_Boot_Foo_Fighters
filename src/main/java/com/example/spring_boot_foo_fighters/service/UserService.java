@@ -18,9 +18,16 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-    public void save(UserDto userDto) {
-        userRepository.save(userMapper.toUserEntity(userDto));
+    public UserEntity save(UserDto userDto) {
+        if (userDto.getAge() > 30) {
+            UserEntity user1 = userMapper.toUserEntity(userDto);
+            UserEntity user = userRepository.save(user1);
+            return user;
+        }
+        throw new IllegalArgumentException("Age not must be less than 30");
     }
+
+
 
     public UserDto getUserById(Long id) {                                // возвращает хюмана с базы данных по ID
         UserEntity userEntity = userRepository.findById(id).orElseThrow(
@@ -43,5 +50,9 @@ public class UserService {
         userEntity.setPhoneNumber(userDto.getPhoneNumber());
         userEntity.setCreatedDate(userEntity.getCreatedDate());
         userRepository.save(userEntity);
+    }
+
+    public void deleteServ(Long id) {                                     // удаление с базы данных через JSON
+        userRepository.deleteById(id);
     }
 }

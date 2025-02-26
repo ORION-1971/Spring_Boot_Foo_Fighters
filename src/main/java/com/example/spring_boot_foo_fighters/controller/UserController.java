@@ -3,6 +3,7 @@ package com.example.spring_boot_foo_fighters.controller;
 
 import com.example.spring_boot_foo_fighters.dto.HumanDto;
 import com.example.spring_boot_foo_fighters.dto.UserDto;
+import com.example.spring_boot_foo_fighters.entity.UserEntity;
 import com.example.spring_boot_foo_fighters.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +22,8 @@ public class UserController {
     }
 
     @PostMapping
-    public void save(@RequestBody UserDto userDto) {
-        userService.save(userDto);
+    public UserEntity save(@RequestBody UserDto userDto) {
+        return userService.save(userDto);
     }
 
 
