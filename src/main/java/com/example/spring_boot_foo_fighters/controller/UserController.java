@@ -5,7 +5,9 @@ import com.example.spring_boot_foo_fighters.dto.HumanDto;
 import com.example.spring_boot_foo_fighters.dto.UserDto;
 import com.example.spring_boot_foo_fighters.entity.UserEntity;
 import com.example.spring_boot_foo_fighters.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,7 +24,7 @@ public class UserController {
     }
 
     @PostMapping
-    public UserEntity save(@RequestBody UserDto userDto) {
+    public UserEntity save(@RequestBody @Valid UserDto userDto) {
         return userService.save(userDto);
     }
 
