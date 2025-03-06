@@ -20,8 +20,8 @@ public class UserService {
 
     public UserEntity save(UserDto userDto) {
         if (userDto.getAge() > 30) {
-            UserEntity user1 = userMapper.toUserEntity(userDto);
-            UserEntity user = userRepository.save(user1);
+            UserEntity user1 = userMapper.toUserEntity(userDto);          /// перевод с Dto в Entity
+            UserEntity user = userRepository.save(user1);                 /// сохранение Entity в БД
             return user;
         }
         throw new IllegalArgumentException("Age not must be less than 30");
