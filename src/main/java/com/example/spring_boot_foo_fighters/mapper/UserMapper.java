@@ -1,14 +1,11 @@
 package com.example.spring_boot_foo_fighters.mapper;
 
-import com.example.spring_boot_foo_fighters.dto.HumanDto;
 import com.example.spring_boot_foo_fighters.dto.UserDto;
-import com.example.spring_boot_foo_fighters.entity.HumanEntity;
 import com.example.spring_boot_foo_fighters.entity.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
