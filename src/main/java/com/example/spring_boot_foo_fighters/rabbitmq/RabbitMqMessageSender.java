@@ -1,5 +1,6 @@
 package com.example.spring_boot_foo_fighters.rabbitmq;
 
+import com.example.spring_boot_foo_fighters.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Queue;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class MessageSender {
+public class RabbitMqMessageSender {
 
     private final RabbitTemplate rabbitTemplate;
 
@@ -20,8 +21,8 @@ public class MessageSender {
         return new Queue("myQueue", false);
     }
 
-    public void send(String message) {
-        rabbitTemplate.convertAndSend("myQueue", message);
-        log.info("Sent message: {}", message);
+    public void send(UserDto userDto) {
+        rabbitTemplate.convertAndSend("myQueue", userDto);
+        log.info("Sent message: {}", userDto);
     }
 }
