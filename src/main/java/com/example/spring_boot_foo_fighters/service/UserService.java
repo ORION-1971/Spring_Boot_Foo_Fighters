@@ -1,12 +1,13 @@
 package com.example.spring_boot_foo_fighters.service;
 
 
-import com.example.spring_boot_foo_fighters.dto.HumanDto;
 import com.example.spring_boot_foo_fighters.dto.UserDto;
-import com.example.spring_boot_foo_fighters.entity.HumanEntity;
 import com.example.spring_boot_foo_fighters.entity.UserEntity;
+import com.example.spring_boot_foo_fighters.exception.NotValidAgeException;
 import com.example.spring_boot_foo_fighters.mapper.UserMapper;
+import com.example.spring_boot_foo_fighters.rabbitmq.RabbitMqMessageSender;
 import com.example.spring_boot_foo_fighters.repository.UserRepository;
+import jdk.jshell.spi.ExecutionControl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,14 +18,18 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final RabbitMqMessageSender rabbitMqMessageSender;
 
     public UserEntity save(UserDto userDto) {
-        if (userDto.getAge() > 30) {
+            if (userDto.getAge() < 20) {
+                throw new NotValidAgeException("Age must be less than 20");
+            }
             UserEntity user1 = userMapper.toUserEntity(userDto);          /// перевод с Dto в Entity
             UserEntity user = userRepository.save(user1);                 /// сохранение Entity в БД
+
+            rabbitMqMessageSender.send(userDto);
             return user;
-        }
-        throw new IllegalArgumentException("Age not must be less than 30");
+
     }
 
 

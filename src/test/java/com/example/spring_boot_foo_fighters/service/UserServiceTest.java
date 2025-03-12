@@ -2,7 +2,9 @@ package com.example.spring_boot_foo_fighters.service;
 
 import com.example.spring_boot_foo_fighters.dto.UserDto;
 import com.example.spring_boot_foo_fighters.entity.UserEntity;
+import com.example.spring_boot_foo_fighters.exception.NotValidAgeException;
 import com.example.spring_boot_foo_fighters.mapper.UserMapper;
+import com.example.spring_boot_foo_fighters.rabbitmq.RabbitMqMessageSender;
 import com.example.spring_boot_foo_fighters.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,6 +29,9 @@ class UserServiceTest {
     @Mock
     private UserMapper userMapper;
 
+    @Mock
+    private RabbitMqMessageSender rabbitMqMessageSender;
+
     @InjectMocks
     private UserService userService;
 
@@ -36,8 +41,8 @@ class UserServiceTest {
     }
 
     @Test
-    void save() {
-        userDto.setAge(40);
+    void save_IfAgeGreaterThen30_ReturnUser() {
+        userDto.setAge(30);
 
         UserEntity userEntity = new UserEntity();
 
@@ -45,16 +50,20 @@ class UserServiceTest {
         when(userRepository.save(userEntity)).thenReturn(userEntity);        // userRepository.save(...);
         //when(userRepository.save(userMapper.toUserEntity(userDto))).thenReturn(userEntity);
 
+        rabbitMqMessageSender.send(userDto);                        // тестирование void метода
+        verify(rabbitMqMessageSender, times(1)).send(userDto);
+
         UserEntity actual = userService.save(userDto);
 
         assertEquals(userEntity, actual);
     }
 
     @Test
-    void save_IfAgeLessThan30_ThrowException() {
-        userDto.setAge(20);
+    void save_IfAgeLessThan10_ThrowException() {
+        userDto.setAge(10);
 
-        assertThrows(IllegalArgumentException.class, () -> userService.save(userDto));
+        Exception ex = assertThrows(NotValidAgeException.class, () -> userService.save(userDto));
+        Assertions.assertEquals(ex.getMessage(), "Age must be less than 20");
     }
 
         @Test
