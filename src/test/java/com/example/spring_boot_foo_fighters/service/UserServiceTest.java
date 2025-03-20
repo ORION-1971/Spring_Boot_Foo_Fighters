@@ -2,7 +2,7 @@ package com.example.spring_boot_foo_fighters.service;
 
 import com.example.spring_boot_foo_fighters.dto.UserDto;
 import com.example.spring_boot_foo_fighters.entity.UserEntity;
-import com.example.spring_boot_foo_fighters.exception.NotValidAgeException;
+import com.example.spring_boot_foo_fighters.exception.ServiceException;
 import com.example.spring_boot_foo_fighters.mapper.UserMapper;
 import com.example.spring_boot_foo_fighters.rabbitmq.RabbitMqMessageSender;
 import com.example.spring_boot_foo_fighters.repository.UserRepository;
@@ -62,7 +62,7 @@ class UserServiceTest {
     void save_IfAgeLessThan10_ThrowException() {
         userDto.setAge(10);
 
-        Exception ex = assertThrows(NotValidAgeException.class, () -> userService.save(userDto));
+        Exception ex = assertThrows(ServiceException.class, () -> userService.save(userDto));
         Assertions.assertEquals(ex.getMessage(), "Age must be less than 20");
     }
 

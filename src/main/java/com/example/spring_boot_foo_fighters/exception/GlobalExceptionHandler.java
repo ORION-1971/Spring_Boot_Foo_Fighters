@@ -20,8 +20,8 @@ import java.util.UUID;
 public class GlobalExceptionHandler {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(NotValidAgeException.class)
-    public RestExceptionResponse handleNotValidAgeException(NotValidAgeException ex, HttpServletRequest request) {
+    @ExceptionHandler(ServiceException.class)
+    public RestExceptionResponse handleNotValidAgeException(ServiceException ex, HttpServletRequest request) {
         var processKey = UUID.randomUUID().toString();
 
         log.error("Service error, status: uuid: {}, message {}", processKey, ex.getMessage());
