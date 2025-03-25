@@ -31,7 +31,7 @@ public class UserService {
             UserEntity user1 = userMapper.toUserEntity(userDto);          /// перевод с Dto в Entity
             UserEntity user = userRepository.save(user1);                 /// сохранение Entity в БД
 
-            rabbitMqMessageSender.send(userDto);
+            //rabbitMqMessageSender.send(userDto);                         // С Security не работает!!!!
             return user;
 
     }
