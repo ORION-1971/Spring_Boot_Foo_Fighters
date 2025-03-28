@@ -16,7 +16,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/{id}")                                   // задает очередной адрес с переменной http://localhost:8080/humans/getById/1 - ...
-    public UserDto getHumanById(@PathVariable Long id){
+    public UserDto getUserById(@PathVariable Long id){
         UserDto userById = userService.getUserById(id);      // возвращает хюмана с запрошенным ID со строки адреса
         return userById;
     }

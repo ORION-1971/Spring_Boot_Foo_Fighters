@@ -5,22 +5,21 @@ import com.example.spring_boot_foo_fighters.entity.HumanEntity;
 import com.example.spring_boot_foo_fighters.mapper.HumanMapper;
 import com.example.spring_boot_foo_fighters.repository.HumanRepository;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class HumanService {
 
     private final HumanRepository humanRepository;                     // HumanService зависит от HumanRepository
     private final HumanMapper humanMapper;
 
-    @Transactional
     public List<HumanDto> getAllHumans() {                              // возвращает список всех хюманов с базы данных
         List<HumanDto> humanDto = humanMapper.toHumanDto(humanRepository.findAll());
         return humanDto;
